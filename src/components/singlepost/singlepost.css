@@ -80,7 +80,21 @@
     line-height: 25px;
     height: 100vh;
   }
-  
+  @media screen and (max-width: 640px) {
+    .SinglePostDescription {
+        font-size: 0.60rem; /* 12px */
+        line-height: 1rem; /* 16px */
+    }
+    .singlePostAuthor{
+        font-size: 0.75rem; /* 12px */
+        line-height: 1rem; /* 16px */
+    }
+
+    .singlePostDate{
+        font-size: 0.75rem; /* 12px */
+        line-height: 1rem; /* 16px */
+    }
+}
   .singlePostDescInput:focus {
     outline: none;
   }

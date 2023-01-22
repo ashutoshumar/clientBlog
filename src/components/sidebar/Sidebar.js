@@ -3,15 +3,16 @@ import axios from 'axios'
 import "./sidebar.css"
 import { useLocation} from "react-router-dom";
 import { Link } from 'react-router-dom'
+import { axiosInstance } from '../../config';
 export const Sidebar = ({catt}) => {
-  const PF = "http://localhost:5000/images/";
+  const PF = "https://bloggerashu.herokuapp.com/images/";
   const [posts,setPosts] = useState([])
   const {search} =useLocation()
 
   useEffect(()=>{
     setPosts([])
      const fetchPost = async ()=>{
-      const res= await axios.get("http://localhost:5000/posts"+search)   
+      const res= await axiosInstance.get("/posts"+search)   
       var i=0  
      const revKey=Object.keys(res.data).reverse()
       console.log(revKey)
@@ -49,7 +50,7 @@ export const Sidebar = ({catt}) => {
                              height='60px'
                              width='60px'
                              className='align-middle rounded-full'
-                             src={PF+post.photo}
+                             src={post.photo}
                     />
                </div>
                <div className='flex-grow ml-4'>

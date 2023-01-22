@@ -2,14 +2,16 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import "./post.css"
 import ReactMarkdown from 'react-markdown'
+
+
 export const Post = ({post}) => {
-  const PF = "http://localhost:5000/images/";
+  const PF = "https://bloggerashu.herokuapp.com/images/";
   return (
     <div className='bg-white shadow-lg rounded-lg p-0 lg:p-5 pb-10 ml-6  mr-6  mb-8'>
       {
         post.photo && ( 
     <div className='relative overflow-hidden shadow-md pb-80 mt-1 mb-6'> 
-<img  src={PF+post.photo} alt=''className="object-top absolute h-80 w-full object-cover shadow-lg rounded-t-lg lg:rounded-md"/>
+<img  src={post.photo} alt=''className="object-top absolute h-80 w-full object-cover shadow-lg rounded-t-lg lg:rounded-md"/>
         </div>
 ) }
 <div className='flex items-center flex-col'>

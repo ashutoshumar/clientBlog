@@ -5,7 +5,7 @@ import { Context } from '../../context/Context'
 import { Transition } from "@headlessui/react";
 export const Topbar = () => {
   const { user, dispatch } = useContext(Context);
-  const PF = "http://localhost:5000/images/"
+  const PF = "https://bloggerashu.herokuapp.com/images/"
   const [isOpen, setIsOpen] = useState(false);
   const handleLogout = () => {
     dispatch({ type: "LOGOUT" });
@@ -104,7 +104,7 @@ export const Topbar = () => {
 
 
               {
-                    user &&  <Link className="hidden md:block  py-2  mr-5  float-right"  to='/setting'  > <img class="object-cover h-12 w-12 rounded-full" src={PF+user.profilePic} alt=''/> </Link>
+                    user &&  <Link className="hidden md:block  py-2  mr-5  float-right"  to='/setting'  > <img class="object-cover h-12 w-12 rounded-full" src={user.profilePic} alt=''/> </Link>
                     
                     
                     }

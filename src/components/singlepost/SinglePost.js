@@ -9,9 +9,10 @@ import { useState } from 'react'
 import { Context } from "../../context/Context";
 import { CommentForm } from '../comment/CommentForm'
 import { Comments } from '../comment/Comments'
+import { axiosInstance } from '../../config'
 export const SinglePost = () => {
   const params = useParams()
-  const PF = "http://localhost:5000/images/";
+  const PF = "https://bloggerashu.herokuapp.com/images/";
   const [post,setPost] = useState({})
   const { user } = useContext(Context);
   const [title, setTitle] = useState("");
@@ -19,7 +20,7 @@ export const SinglePost = () => {
   const [updateMode, setUpdateMode] = useState(false);
   useEffect(()=>{
     const fetchPost = async ()=>{
-     const res= await axios.get(`http://localhost:5000/posts/${params.postId}`)
+     const res= await axiosInstance.get(`/posts/${params.postId}`)
      setPost(res.data)
      setTitle(res.data.title)
      setDesc(res.data.description)
@@ -30,7 +31,7 @@ export const SinglePost = () => {
 
  const handleDelete = async () => {
   try {
-    await axios.delete(`http://localhost:5000/posts/${post._id}`, {
+    await axiosInstance.delete(`/posts/${post._id}`, {
       data: { username: user.username },
     });
     window.location.replace("/");
@@ -39,7 +40,7 @@ export const SinglePost = () => {
 
 const handleUpdate = async () => {
   try {
-    await axios.put(`http://localhost:5000/posts/${post._id}`, {
+    await axiosInstance.put(`/posts/${post._id}`, {
       username: user.username,
       title:title,
       description:desc,
@@ -56,7 +57,7 @@ const handleUpdate = async () => {
         {
           post.photo &&  (
             <div className='relative overflow-hidden shadow-md pb-80 mt-1 mb-6 mt-0'> 
-            <img  src={PF+post.photo} alt=''className="object-top absolute h-80 w-full object-cover shadow-lg rounded-t-lg lg:rounded-md"/>
+            <img  src={post.photo} alt=''className="object-top absolute h-80 w-full object-cover shadow-lg rounded-t-lg lg:rounded-md"/>
                     </div>
           )
         }
@@ -81,8 +82,8 @@ const handleUpdate = async () => {
         )}
 
   <div className='singlePostInfo'>
-    <span className='singlePostAuthor ml-5 '>Author: <Link className='link' exact to={`/?user=${post.username}`}><b>{post.username}</b></Link></span>
-    <span className='singlePostDate mr-2'>{new Date(post.createdAt).toDateString()}</span>
+    <span className='singlePostAuthor ml-5 md:text-base  sm:text-sm '>Author: <Link className='link' exact to={`/?user=${post.username}`}><b>{post.username}</b></Link></span>
+    <span className='singlePostDate mr-2 md:text-base  sm:text-sm'>{new Date(post.createdAt).toDateString()}</span>
 
   </div>
   {updateMode ? (
@@ -93,7 +94,7 @@ const handleUpdate = async () => {
          />
          
         ) : (
-  <p className='SinglePostDescription md:ml-5 md:mr-5 ms:ml-5 ms:mr-5'><ReactMarkdown>{desc}</ReactMarkdown></p>
+  <p className='SinglePostDescription md:ml-5 md:mr-5 ms:ml-5 ms:mr-5 md:text-base  sm:text-base'><ReactMarkdown>{desc}</ReactMarkdown></p>
         )}
 
     {updateMode && (

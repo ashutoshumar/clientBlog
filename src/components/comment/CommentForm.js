@@ -1,6 +1,7 @@
 import React,{useState,useContext} from 'react'
 import { Context } from '../../context/Context';
 import axios from 'axios';
+import { axiosInstance } from '../../config';
 export const CommentForm = ({postId}) => {
     const { user, dispatch } = useContext(Context);
     const [error, setError] = useState(false);
@@ -24,7 +25,7 @@ export const CommentForm = ({postId}) => {
 
     console.log(commentObj)
         try {
-          const res = await axios.post("http://localhost:5000/comment/post", commentObj);
+          const res = await axiosInstance.post("/comment/post", commentObj);
           console.log(res)
           setShowSuccessMessage(true)
           setComment(' ')

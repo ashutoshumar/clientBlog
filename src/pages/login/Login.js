@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { useContext } from 'react'
 import { Context } from '../../context/Context'
 import axios from "axios"
-
+import { axiosInstance } from '../../config'
 
 export const Login = () => {
   const emailRef = useRef();
@@ -16,7 +16,7 @@ export const Login = () => {
     e.preventDefault();
     dispatch({ type: "LOGIN_START" });
     try {
-      const res = await axios.post("http://localhost:5000/auth/login", {
+      const res = await axiosInstance.post("/auth/login", {
         email: emailRef.current.value,
         password: passwordRef.current.value,
       });

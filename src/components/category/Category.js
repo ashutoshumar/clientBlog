@@ -2,11 +2,12 @@ import React,{useState,useEffect} from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import './category.css'
+import { axiosInstance } from '../../config'
 export const Category = () => {
     const [cats,setCats] = useState([])
     useEffect(()=>{
       const getCats = async ()=>{
-       const res= await axios.get(`http://localhost:5000/categories`)
+       const res= await axiosInstance.get(`/categories`)
        console.log(res.data)
        setCats(res.data)
       

@@ -1,11 +1,11 @@
 import React,{useState,useEffect} from 'react'
 import axios from 'axios';
-
+import { axiosInstance } from '../../config';
 export const Comments = ({postId}) => {
   const [comments, setComments] = useState([]);
   useEffect(()=>{
     const fetchPost = async ()=>{
-     const res= await axios.get(`http://localhost:5000/comment/${postId}`)
+     const res= await axiosInstance.get(`/comment/${postId}`)
      setComments(res.data)
     
     

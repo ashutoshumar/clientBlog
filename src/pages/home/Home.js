@@ -8,12 +8,13 @@ import { Sidebar } from '../../components/sidebar/Sidebar'
 import { useEffect } from 'react'
 import { useLocation} from "react-router-dom";
 import { Category } from '../../components/category/Category'
+import { axiosInstance } from '../../config'
 export const Home = () => {
   const [posts,setPosts] = useState([])
   const {search} =useLocation()
   useEffect(()=>{
      const fetchPost = async ()=>{
-      const res= await axios.get("http://localhost:5000/posts"+search)
+      const res= await axiosInstance.get("/posts"+search)
       setPosts(res.data)
      
      }
